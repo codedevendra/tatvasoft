@@ -1,0 +1,321 @@
+<div class="container mt-4">
+  <mat-horizontal-stepper labelPosition="bottom">
+    <mat-step [stepControl]="projectDetailsForm">
+      <form [formGroup]="projectDetailsForm">
+        <ng-template matStepLabel>Project details</ng-template>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Organization</label>
+              <select class="form-control" formControlName="organization">
+                <option value="Org1">
+                  Org1
+                </option>
+                <option value="Org2">
+                  Org2
+                </option>
+                <option value="Org3">
+                  Org3
+                </option>
+
+              </select>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Category</label>
+              <select class="form-control" formControlName="category">
+                <option value="Cat1">
+                  Cat1
+                </option>
+                <option value="Cat2">
+                  Cat2
+                </option>
+                <option value="Cat3">
+                  Cat3
+                </option>
+
+              </select>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Activity</label>
+              <select class="form-control" formControlName="activity">
+                <option value="Act1">
+                  Act1
+                </option>
+                <option value="Act2">
+                  Act2
+                </option>
+                <option value="Act">
+                  Act
+                </option>
+
+              </select>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="">Title</label>
+              <input formControlName="title" type="text" class="form-control">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="">Min age</label>
+              <input formControlName="minAge" type="number" class="form-control">
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="">Max age</label>
+              <input formControlName="maxAge" type="number" class="form-control">
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <label for="">Overview description</label>
+            <textarea formControlName="overviewDescription" class="form-control">
+            </textarea>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end">
+          <button class="btn btn-danger mt-2" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="galleryForm">
+      <form [formGroup]="galleryForm">
+        <ng-template matStepLabel>Project gallery</ng-template>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Project name</label>
+              <select class="form-control" formControlName="projectName">
+                <option value="Name1">
+                  Name1
+                </option>
+                <option value="Name2">
+                  Name2
+                </option>
+                <option value="Name3">
+                  Name3
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="">Project images</label>
+              <input (change)="onFileSelect($event)" type="file" class="form-control" multiple accept=".png,.jpg">
+            </div>
+          </div>
+
+          <div class="col-sm-12">
+            <div class="d-flex justify-content-around">
+              <div class="img-container " *ngFor="let item of images ; let index=index ">
+                <div><img src="{{item}}" width="100px" height="100px"></div>
+                <div class="d-flex justify-content-center mt-2">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between">
+          <button class="btn btn-danger mt-2" matStepperPrevious>Back</button>
+          <button class="btn btn-danger mt-2" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="projectCoast">
+      <ng-template matStepLabel>Project coast</ng-template>
+      <form [formGroup]="projectCoast">
+        <div class="form-group">
+          <label for="">Project name</label>
+          <select class="form-control" formControlName="projectName">
+            <option value="Name1">
+              Name1
+            </option>
+            <option value="Name2">
+              Name2
+            </option>
+            <option value="Name3">
+              Name3
+            </option>
+
+          </select>
+        </div>
+
+        <div formArrayName="projectCoasts" class="mb-4">
+          <div class="row">
+            <div class="col-sm-5">
+              <label>Project duration</label>
+            </div>
+
+            <div class="col-sm-5">
+
+              Project coast
+            </div>
+            <div class="col-sm-2">
+              Action
+            </div>
+          </div>
+          <div formGroupName="{{index}}" class="row mt-2" *ngFor="let item of productCoastControls; let index=index">
+
+
+            <div class="col-sm-5">
+              <input formControlName="weeks" type="number" placeholder="project duration" class="form-control">
+            </div>
+
+            <div class="col-sm-5">
+
+              <input type="number" formControlName="coast" placeholder="project coast" class="form-control">
+            </div>
+            <div class="col-sm-2">
+              <button class="btn btn-danger" (click)="removeProductCoast(index)" *ngIf="index!=0">delete</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button (click)="addProductCoast()" class="btn btn-danger w-100">Add row</button>
+        </div>
+
+      </form>
+
+      <div class="d-flex justify-content-between">
+        <button class="btn btn-danger mt-2" matStepperPrevious>Back</button>
+        <button class="btn btn-danger mt-2" matStepperNext>Next</button>
+      </div>
+
+    </mat-step>
+
+    <mat-step [stepControl]="projectInclude">
+      <ng-template matStepLabel>Project Includes</ng-template>
+      <form [formGroup]="projectInclude">
+        <div class="form-group">
+          <label for="">Project name</label>
+          <select class="form-control" formControlName="projectName">
+            <option value="Name1">
+              Name1
+            </option>
+            <option value="Name2">
+              Name2
+            </option>
+            <option value="Name3">
+              Name3
+            </option>
+
+          </select>
+        </div>
+
+        <div formArrayName="includes" class="mb-4">
+          <div class="row">
+            <div class="col-sm-5">
+              <label>Include description</label>
+            </div>
+
+            <div class="col-sm-5">
+              include or not
+            </div>
+            <div class="col-sm-2">
+              Action
+            </div>
+          </div>
+          <div class="row mt-2" formGroupName="{{index}}"
+            *ngFor="let item of getProjectIncludesControls; let index=index">
+
+
+            <div class="col-sm-5">
+              <input type="text" formControlName="description" placeholder="include description" class="form-control">
+            </div>
+
+            <div class="col-sm-5">
+
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" formControlName="include" value="Include">Include
+                </label>
+              </div>
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" formControlName="include" value="Not include">Not include
+                </label>
+              </div>
+
+
+            </div>
+            <div class="col-sm-2">
+              <button class="btn btn-danger" (click)="removeProjectControls(index)" *ngIf="index!=0">delete</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button (click)="addProjectIncludes()" class="btn btn-danger w-100">Add row</button>
+        </div>
+
+      </form>
+
+      <div class="d-flex justify-content-between">
+        <button class="btn btn-danger mt-2" matStepperPrevious>Back</button>
+        <button class="btn btn-danger mt-2" matStepperNext>Next</button>
+      </div>
+
+    </mat-step>
+
+    <mat-step [stepControl]="projectDate">
+      <ng-template matStepLabel>Project dates</ng-template>
+      <form [formGroup]="projectDate">
+        <div class="form-group">
+          <label for="">Project name</label>
+          <select class="form-control" formControlName="projectName">
+            <option value="Name1">
+              Name1
+            </option>
+            <option value="Name2">
+              Name2
+            </option>
+            <option value="Name3">
+              Name3
+            </option>
+          </select>
+        </div>
+        <div formArrayName="dates" class="mb-4">
+          <div class="row">
+            <div class="col-sm-5">
+              <label>Project start dates</label>
+            </div>
+            <div class="col-sm-2">
+              Action
+            </div>
+          </div>
+          <div class="row mt-2" formGroupName="{{index}}" *ngFor="let item of getProjectDateControls; let index=index">
+            <div class="col-sm-5">
+              <input type="date" formControlName="date" placeholder="include description" class="form-control">
+            </div>
+            <div class="col-sm-2">
+              <button class="btn btn-danger" (click)="removeProjectDates(index)" *ngIf="index!=0">delete</button>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button (click)="addProjectDate()" class="btn btn-danger w-100">Add row</button>
+        </div>
+      </form>
+      <div class="d-flex justify-content-between">
+        <button class="btn btn-danger mt-2" matStepperPrevious>Back</button>
+        <button class="btn btn-danger mt-2" (click)="onSubmit()">Submit</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+
+</div>

@@ -1,0 +1,81 @@
+<div class="container p-2">
+  <h3>Project details</h3>
+  <p class="font-weight-bold">activity : {{formData?.projectDetails?.activity}}</p>
+  <br>
+  <p class="font-weight-bold">category : {{formData?.projectDetails?.category}}</p>
+  <br>
+  <p class="font-weight-bold">max age : {{formData?.projectDetails?.maxAge}}</p>
+  <br>
+  <p class="font-weight-bold">min age : {{formData?.projectDetails?.minAge}}</p>
+  <br>
+  <p class="font-weight-bold">organization : {{formData?.projectDetails?.organization}}</p>
+  <br>
+
+  <p class="font-weight-bold">overview description : {{formData?.projectDetails?.overviewDescription}}</p>
+  <br>
+
+  <p class="font-weight-bold">title : {{formData?.projectDetails?.title}}</p>
+  <br>
+  <hr>
+
+  <h3>
+    Gallery
+  </h3>
+  <div class="row">
+    <div class="col-sm-4" *ngFor="let item of formData?.gallery.images">
+      <img src={{item}} width="100%">
+    </div>
+  </div>
+
+  <hr>
+
+  <h3>
+    Project coast
+  </h3>
+  <div class="row">
+    <div class="col-sm-4" *ngFor="let item of formData?.projectCoast.projectCoasts">
+
+      <div class="d-flex">
+        <div>
+          <p class="font-weight-bold">weeks : {{item.weeks}}</p>
+        </div>
+        <div>
+          <p class="font-weight-bold">coast : {{item.coast}}</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <h3>Project Includes
+  </h3>
+  <div class="row">
+    <div class="col-sm-4" *ngFor="let item of formData?.projectInclude.includes">
+
+      <div class="d-flex">
+        <div>
+          <p class="font-weight-bold">include : {{item.include}}</p>
+        </div>
+        <div>
+          <p class="font-weight-bold">description : {{item.description}}</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <h3>Project Dates
+  </h3>
+  <div class="row">
+    <div class="col-sm-4" *ngFor="let item of formData?.projectDate.dates">
+
+      <div class="d-flex">
+        <div>
+          <p class="font-weight-bold">date : {{item.date}}</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
